@@ -15,8 +15,16 @@ spring:
         hibernate:
           jdbc:
             lob.non-contextual-creation: true
+#    rabbitmq:
+#      host: localhost
+#      port: 5672
+#      username: guest
+#      password: guest
     rabbitmq:
-      host: localhost
-      port: 5672
-      username: guest
-      password: guest
+      addresses: amqps://beugxnyy:Fc9DwOEnSkBg4ymBmQ76lxBJCprVaubq@beaver.rmq.cloudamqp.com/beugxnyy
+      broker:
+        exchange:
+          userOrderExchange: order.orderevent
+        queue:
+          orderEventQueue:
+            name: order.orderevent.queue
