@@ -48,6 +48,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderModel> findOrderByUserId(UUID userId) {
-       return orderRepository.findOrderByUserId(userId);
+       return orderRepository.findByUserIdUserId(userId);
     }
 }

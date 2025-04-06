@@ -1,6 +1,7 @@
 package com.btg.orderservice.repositories;
 
 import com.btg.orderservice.models.OrderModel;
+import com.btg.orderservice.models.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,15 +14,15 @@ import java.util.UUID;
 @Repository
 public interface OrderRepository extends JpaRepository<OrderModel, UUID> {
 
-    // a. Retornar o valor total do pedido
-    @Query("SELECT p.valorTotal FROM Pedido p WHERE p.codigoPedido = :codigoPedido")
+    //retornar o valor total do pedido
+    @Query("SELECT p.totalValue FROM OrderModel p WHERE p.orderId = :codigoPedido")
     BigDecimal getOrderTotalValue(@Param("codigoPedido") UUID codigoPedido);
 
-    // b. Contar a quantidade de pedidos por cliente
-    @Query("SELECT COUNT(p) FROM OrderModel p WHERE p.codigoCliente = :codigoCliente")
+    //contar a quantidade de pedidos por cliente
+    @Query("SELECT COUNT(p) FROM OrderModel p WHERE p.userId = :codigoCliente")
     Long orderCountByUserId(@Param("userId") UUID userId);
 
-    // c. Listar pedidos realizados por um cliente
-    List<OrderModel> findOrderByUserId(UUID userId);
+    //listar pedidos realizados por um cliente
+    List<OrderModel> findByUserIdUserId(UUID userId);
 
 }
