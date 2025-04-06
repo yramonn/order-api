@@ -1,6 +1,5 @@
 package com.btg.orderservice.controllers;
 
-import com.btg.orderservice.models.OrderModel;
 import com.btg.orderservice.services.OrderService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,8 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.UUID;
+
 
 
 @RestController
@@ -24,23 +22,10 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-
-    @GetMapping("/{orderId}/valor-total")
+    @GetMapping("/{orderId}/value")
     public ResponseEntity<BigDecimal> getOrderTotalValue(@PathVariable Long orderId) {
         BigDecimal totalValue = orderService.getOrderTotalValue(orderId);
+        logger.info("Total Value: {} ", totalValue);
         return ResponseEntity.ok(totalValue);
     }
-
-    @GetMapping("/users/{userId}/all-orders")
-    public ResponseEntity<Integer> getOrderCountByUserId(@PathVariable Long userId) {
-        Integer total = orderService.orderCountByUserId(userId);
-        return ResponseEntity.ok(total);
-    }
-
-    @GetMapping("/users/{userId}")
-    public ResponseEntity<List<OrderModel>> getAllOrdersByUserId(@PathVariable Long userId) {
-        List<OrderModel> orders = orderService.findOrderByUserId(userId);
-        return ResponseEntity.ok(orders);
-    }
-
 }

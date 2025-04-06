@@ -44,6 +44,7 @@ public class OrderServiceImpl implements OrderService {
         });
 
         userModel.countOrder();
+        logger.info("User {} has {} orders now", userModel.getUserId(), userModel.getQuantityOrder());
         userRepository.save(userModel);
 
         OrderModel order = dto.convertToOrderModel();
