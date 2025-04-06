@@ -13,6 +13,7 @@ import java.util.UUID;
 public class ItemModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     private String product;

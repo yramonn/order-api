@@ -25,7 +25,6 @@ public class OrderConsumer {
                     type = ExchangeTypes.FANOUT, ignoreDeclarationExceptions = "true"))
     )
     public void listenUserEvent(@Payload OrderEventDto orderEventDto) {
-        var orderModel = orderEventDto.convertToOrderModel();
-        orderService.save(orderModel);
+        orderService.processOrderEvent(orderEventDto);
     }
 }

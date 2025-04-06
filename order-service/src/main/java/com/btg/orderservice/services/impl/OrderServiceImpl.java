@@ -1,5 +1,6 @@
 package com.btg.orderservice.services.impl;
 
+import com.btg.orderservice.dtos.OrderEventDto;
 import com.btg.orderservice.models.OrderModel;
 import com.btg.orderservice.models.UserModel;
 import com.btg.orderservice.repositories.OrderRepository;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -30,6 +31,26 @@ public class OrderServiceImpl implements OrderService {
          OrderModel newOrder = orderRepository.save(orderModel);
          logger.info("New order save with success: {}", newOrder);
          return orderModel;
+    }
+
+    @Override
+    public void processOrderEvent(OrderEventDto dto) {
+        Optional<UserModel> optionalUser = userRepository.findById(dto.userId());
+
+        UserModel userModel = optionalUser.orElseGet(() -> {
+            UserModel newUser = new UserModel();
+            newUser.setUserId(dto.userId());
+            return newUser;
+        });
+
+        userModel.countOrder();
+        userRepository.save(userModel);
+
+        OrderModel order = dto.convertToOrderModel();
+
+        order.setUser(userModel);
+
+        orderRepository.save(order);
     }
 
     @Override
