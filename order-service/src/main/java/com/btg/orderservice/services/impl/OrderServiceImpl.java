@@ -1,9 +1,6 @@
 package com.btg.orderservice.services.impl;
 
-import com.btg.orderservice.dtos.OrderEventDto;
-import com.btg.orderservice.dtos.TotalOrderValueDto;
-import com.btg.orderservice.dtos.UserOrderCountDto;
-import com.btg.orderservice.exceptions.UserNotFoundException;
+import com.btg.orderservice.dtos.*;
 import com.btg.orderservice.models.OrderModel;
 import com.btg.orderservice.models.UserModel;
 import com.btg.orderservice.repositories.OrderRepository;
@@ -31,9 +28,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderModel save(OrderModel orderModel) {
-         OrderModel newOrder = orderRepository.save(orderModel);
-         logger.info("New order save with success: {}", newOrder);
-         return orderModel;
+        OrderModel newOrder = orderRepository.save(orderModel);
+        logger.info("New order save with success: {}", newOrder);
+        return orderModel;
     }
 
     @Override
@@ -57,22 +54,38 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.save(order);
     }
 
-    public TotalOrderValueDto getOrderTotalValue(Long orderId) {
+    public TotalOrderValueResponseDto getOrderTotalValue(Long orderId) {
         return orderRepository.findById(orderId)
-                .map(order -> new TotalOrderValueDto(order.getOrderId(), order.getTotalValue()))
-                .orElse(new TotalOrderValueDto(orderId, BigDecimal.ZERO));
+                .map(order -> new TotalOrderValueResponseDto(order.getOrderId(), order.getTotalValue()))
+                .orElse(new TotalOrderValueResponseDto(orderId, BigDecimal.ZERO));
     }
 
 
     @Override
-    public UserOrderCountDto orderCountByUserId(Long userId) {
-       return userRepository.findById(userId)
-               .map(count -> new UserOrderCountDto(count.getUserId(), count.getQuantityOrder()))
-               .orElse(new UserOrderCountDto(userId, 0 ));
+    public UserOrderCountResponseDto orderCountByUserId(Long userId) {
+        return userRepository.findById(userId)
+                .map(count -> new UserOrderCountResponseDto(count.getUserId(), count.getQuantityOrder()))
+                .orElse(new UserOrderCountResponseDto(userId, 0));
     }
 
     @Override
-    public List<OrderModel> findOrderByUserId(Long userId) {
-       return orderRepository.findByUserUserId(userId);
+    public List<OrderResponseDto> findOrderByUserId(Long userId) {
+        return orderRepository.findByUserUserId(userId)
+                .stream()
+                .map(this::toOrderResponseDto)
+                .toList();
+    }
+
+    private OrderResponseDto toOrderResponseDto(OrderModel order) {
+        List<ItemResponseDto> itens = order.getItens().stream()
+                .map(item -> new ItemResponseDto(item.getProduct(), item.getQuantity(), item.getValue()))
+                .toList();
+
+        return new OrderResponseDto(
+                order.getOrderId(),
+                order.getUser().getUserId(),
+                order.getTotalValue(),
+                itens
+        );
     }
 }
