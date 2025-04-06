@@ -1,6 +1,9 @@
 package com.btg.orderservice.services.impl;
 
 import com.btg.orderservice.dtos.OrderEventDto;
+import com.btg.orderservice.dtos.TotalOrderValueDto;
+import com.btg.orderservice.dtos.UserOrderCountDto;
+import com.btg.orderservice.exceptions.UserNotFoundException;
 import com.btg.orderservice.models.OrderModel;
 import com.btg.orderservice.models.UserModel;
 import com.btg.orderservice.repositories.OrderRepository;
@@ -54,18 +57,18 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.save(order);
     }
 
-    @Override
-    public BigDecimal getOrderTotalValue(Long orderId) {
+    public TotalOrderValueDto getOrderTotalValue(Long orderId) {
         return orderRepository.findById(orderId)
-                .map(OrderModel::getTotalValue)
-                .orElse(new BigDecimal(0));
+                .map(order -> new TotalOrderValueDto(order.getOrderId(), order.getTotalValue()))
+                .orElse(new TotalOrderValueDto(orderId, BigDecimal.ZERO));
     }
 
+
     @Override
-    public Integer orderCountByUserId(Long userId) {
+    public UserOrderCountDto orderCountByUserId(Long userId) {
        return userRepository.findById(userId)
-               .map(UserModel::getQuantityOrder)
-               .orElse(0);
+               .map(count -> new UserOrderCountDto(count.getUserId(), count.getQuantityOrder()))
+               .orElse(new UserOrderCountDto(userId, 0 ));
     }
 
     @Override

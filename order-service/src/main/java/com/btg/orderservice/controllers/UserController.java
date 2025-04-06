@@ -1,5 +1,6 @@
 package com.btg.orderservice.controllers;
 
+import com.btg.orderservice.dtos.UserOrderCountDto;
 import com.btg.orderservice.models.OrderModel;
 import com.btg.orderservice.services.OrderService;
 import org.apache.logging.log4j.LogManager;
@@ -26,14 +27,14 @@ public class UserController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/users/{userId}/orders/count")
-    public ResponseEntity<Integer> getOrderCountByUserId(@PathVariable Long userId) {
-        Integer total = orderService.orderCountByUserId(userId);
-        logger.info("Total Count: {}", total);
-        return ResponseEntity.ok(total);
+    @GetMapping("/{userId}/orders/count")
+    public ResponseEntity<UserOrderCountDto> getOrderCountByUserId(@PathVariable Long userId) {
+        UserOrderCountDto userOrderCount = orderService.orderCountByUserId(userId);
+        logger.info("Total Count: {}", userOrderCount);
+        return ResponseEntity.ok(userOrderCount);
     }
 
-    @GetMapping("/users/{userId}/orders")
+    @GetMapping("/{userId}/orders")
     public ResponseEntity<List<OrderModel>> getAllOrdersByUserId(@PathVariable Long userId) {
         List<OrderModel> orders = orderService.findOrderByUserId(userId);
         logger.info("Orders: {}", orders);
