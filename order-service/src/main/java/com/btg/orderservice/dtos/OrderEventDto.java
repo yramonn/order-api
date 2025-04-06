@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.UUID;
 
 public record OrderEventDto(
-        @JsonProperty("codigoPedido") UUID orderId,
-        @JsonProperty("codigoCliente") UUID userId,
+        @JsonProperty("codigoPedido") Long orderId,
+        @JsonProperty("codigoCliente") Long userId,
         @JsonProperty("itens") List<ItemEventDto> itens
 )
  {
@@ -22,7 +22,7 @@ public record OrderEventDto(
         UserModel userModel = new UserModel();
         userModel.setUserId(userId); // seta o ID que veio no DTO
 
-        order.setUserId(userModel);
+        order.setUser(userModel);
 
         List<ItemModel> itensModel = itens.stream().map(item -> {
             ItemModel itemModel = new ItemModel();

@@ -1,6 +1,5 @@
 package com.btg.orderservice.consumers;
 
-import com.btg.orderservice.dtos.ItemEventDto;
 import com.btg.orderservice.dtos.OrderEventDto;
 import com.btg.orderservice.services.OrderService;
 import org.springframework.amqp.core.ExchangeTypes;
@@ -21,8 +20,8 @@ public class OrderConsumer {
     }
 
     @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(value = "${rabbitmq.broker.queue.orderEventQueue.name}", durable = "true"),
-            exchange = @Exchange(value = "${rabbitmq.broker.exchange.userOrderExchange}",
+            value = @Queue(value = "${order.broker.queue.orderEventQueue.name}", durable = "true"),
+            exchange = @Exchange(value = "${order.broker.exchange.orderEventExchange}",
                     type = ExchangeTypes.FANOUT, ignoreDeclarationExceptions = "true"))
     )
     public void listenUserEvent(@Payload OrderEventDto orderEventDto) {

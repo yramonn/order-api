@@ -26,19 +26,19 @@ public class OrderController {
 
 
     @GetMapping("/{orderId}/valor-total")
-    public ResponseEntity<BigDecimal> getOrderTotalValue(@PathVariable UUID orderId) {
+    public ResponseEntity<BigDecimal> getOrderTotalValue(@PathVariable Long orderId) {
         BigDecimal totalValue = orderService.getOrderTotalValue(orderId);
         return ResponseEntity.ok(totalValue);
     }
 
     @GetMapping("/users/{userId}/all-orders")
-    public ResponseEntity<Integer> getOrderCountByUserId(@PathVariable UUID userId) {
+    public ResponseEntity<Integer> getOrderCountByUserId(@PathVariable Long userId) {
         Integer total = orderService.orderCountByUserId(userId);
         return ResponseEntity.ok(total);
     }
 
     @GetMapping("/users/{userId}")
-    public ResponseEntity<List<OrderModel>> getAllOrdersByUserId(@PathVariable UUID userId) {
+    public ResponseEntity<List<OrderModel>> getAllOrdersByUserId(@PathVariable Long userId) {
         List<OrderModel> orders = orderService.findOrderByUserId(userId);
         return ResponseEntity.ok(orders);
     }

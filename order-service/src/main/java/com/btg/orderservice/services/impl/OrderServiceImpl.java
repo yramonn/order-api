@@ -33,21 +33,21 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public BigDecimal getOrderTotalValue(UUID orderId) {
+    public BigDecimal getOrderTotalValue(Long orderId) {
         return orderRepository.findById(orderId)
                 .map(OrderModel::getTotalValue)
                 .orElse(new BigDecimal(0));
     }
 
     @Override
-    public Integer orderCountByUserId(UUID userId) {
+    public Integer orderCountByUserId(Long userId) {
        return userRepository.findById(userId)
                .map(UserModel::getQuantityOrder)
                .orElse(0);
     }
 
     @Override
-    public List<OrderModel> findOrderByUserId(UUID userId) {
-       return orderRepository.findByUserIdUserId(userId);
+    public List<OrderModel> findOrderByUserId(Long userId) {
+       return orderRepository.findByUserUserId(userId);
     }
 }

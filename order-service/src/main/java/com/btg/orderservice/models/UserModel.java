@@ -16,7 +16,7 @@ public class UserModel implements Serializable {
 
 
     @Id
-    private UUID userId;
+    private Long userId;
 
     private Integer quantityOrder = 0;
 
@@ -24,11 +24,11 @@ public class UserModel implements Serializable {
         this.quantityOrder++;
     }
 
-    public UUID getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(UUID userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

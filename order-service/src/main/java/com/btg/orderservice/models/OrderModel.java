@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
@@ -16,11 +15,11 @@ public class OrderModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    private UUID orderId;
+    private Long orderId;
 
     @ManyToOne
     @JoinColumn(name = "userId")
-    private UserModel userId;
+    private UserModel user;
 
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal totalValue = BigDecimal.ZERO;
@@ -35,20 +34,20 @@ public class OrderModel implements Serializable {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    public UUID getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(UUID orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
-    public UserModel getUserId() {
-        return userId;
+    public UserModel getUser() {
+        return user;
     }
 
-    public void setUserId(UserModel userId) {
-        this.userId = userId;
+    public void setUser(UserModel user) {
+        this.user = user;
     }
 
     public List<ItemModel> getItens() {
