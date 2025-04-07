@@ -10,18 +10,18 @@ spring:
     jpa:
       hibernate:
         ddl-auto: update
-      show_sql: true
+      show-sql: true
       properties:
         hibernate:
           jdbc:
             lob.non-contextual-creation: true
-#    rabbitmq:
-#      host: localhost
-#      port: 5672
-#      username: guest
-#      password: guest
     rabbitmq:
-      addresses: amqps://beugxnyy:Fc9DwOEnSkBg4ymBmQ76lxBJCprVaubq@beaver.rmq.cloudamqp.com/beugxnyy
+      host: rabbitmq
+      port: 5672
+      username: guest
+      password: guest
+#    rabbitmq:
+#      addresses: amqps://beugxnyy:Fc9DwOEnSkBg4ymBmQ76lxBJCprVaubq@beaver.rmq.cloudamqp.com/beugxnyy
 order:
   broker:
     exchange:
