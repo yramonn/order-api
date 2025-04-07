@@ -2,6 +2,8 @@
 
 This application is a microservice responsible for managing orders, including user and item tracking, message processing via RabbitMQ, and data persistence using PostgreSQL.
 ![image](https://github.com/user-attachments/assets/33d3b620-aa1e-4b57-94f9-e80c560c513d)
+![image](https://github.com/user-attachments/assets/2c03a70f-747f-4e1d-80c3-761c6b09396a)
+
 
 
 ---
