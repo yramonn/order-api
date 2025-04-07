@@ -40,3 +40,7 @@ This application is a microservice responsible for managing orders, including us
 - Maven
 - Docker (optional for RabbitMQ and PostgreSQL)
 
+# Developer
+Ramon Silva
+https://www.linkedin.com/in/ramon--silva/
+
