@@ -16,12 +16,7 @@ spring:
           jdbc:
             lob.non-contextual-creation: true
     rabbitmq:
-      host: rabbitmq
-      port: 5672
-      username: guest
-      password: guest
-#    rabbitmq:
-#      addresses: amqps://beugxnyy:Fc9DwOEnSkBg4ymBmQ76lxBJCprVaubq@beaver.rmq.cloudamqp.com/beugxnyy
+      addresses: amqps://beugxnyy:Fc9DwOEnSkBg4ymBmQ76lxBJCprVaubq@beaver.rmq.cloudamqp.com/beugxnyy
 order:
   broker:
     exchange:
