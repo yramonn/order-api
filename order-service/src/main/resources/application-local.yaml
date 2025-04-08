@@ -1,0 +1,31 @@
+server:
+  port: 8083
+spring:
+    application:
+      name: order-service
+    datasource:
+      url: jdbc:postgresql://localhost:5432/order-db
+      username: postgres
+      password: admin
+    jpa:
+      hibernate:
+        ddl-auto: update
+      show-sql: true
+      properties:
+        hibernate:
+          jdbc:
+            lob.non-contextual-creation: true
+    rabbitmq:
+      host: rabbitmq
+      port: 5672
+      username: guest
+      password: guest
+#    rabbitmq:
+#      addresses: amqps://beugxnyy:Fc9DwOEnSkBg4ymBmQ76lxBJCprVaubq@beaver.rmq.cloudamqp.com/beugxnyy
+order:
+  broker:
+    exchange:
+      orderEventExchange: order.orderevent
+    queue:
+      orderEventQueue:
+        name: order.orderevent.queue
