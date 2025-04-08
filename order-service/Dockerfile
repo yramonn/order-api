@@ -1,6 +1,6 @@
 FROM maven:3.9.2-amazoncorretto-17 AS build
 WORKDIR /app
-COPY . .
+COPY ./order-service /app
 RUN mvn clean package -DskipTests
 
 FROM openjdk:17-jdk-alpine
