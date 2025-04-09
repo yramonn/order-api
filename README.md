@@ -35,12 +35,41 @@ This application is a microservice responsible to process orders from  RabbitMQ,
 ---
 
 ## 🚀 Running the Project Locally
+📦 Clone repository
+git clone https://github.com/yramonn/order-api.git
 
-### Prerequisites
+☕ Set Up Your Environment
+Make sure you have Java 17 and Maven installed and properly configured in your IDE to manage project dependencies.
 
-- Java 17+
-- Maven
-- Docker (optional for RabbitMQ and PostgreSQL)
+🐳 Start Services with Docker
+un the following command to build and start all required services:
+docker-compose up --build
+
+The Docker image is also available on Docker Hub:
+🔗 https://hub.docker.com/r/yramonn/order-service
+
+🚀 Useful Endpoints
+Swagger UI (API Documentation):
+http://localhost:8083/swagger-ui/index.html
+
+RabbitMQ Management UI:
+http://localhost:15672
+
+Username: guest
+
+Password: guest
+
+PostgreSQL (Database Connection):
+
+Host: localhost
+
+Port: 5432
+
+Database: order-db
+
+Username: postgres
+
+Password: admin
 
 # Developer
 Ramon Silva
