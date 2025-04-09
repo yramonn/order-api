@@ -1,6 +1,9 @@
 # 🧾 Order Service API
+The Swagger  of the application is available to everyone on https://order-api-dko6.onrender.com/swagger-ui/index.html
+![image](https://github.com/user-attachments/assets/a04bf14e-2f62-4fa5-af2f-029ec2f6c77e)
 
-This application is a microservice responsible for managing orders, including user and item tracking, message processing via RabbitMQ, and data persistence using PostgreSQL.
+
+This application is a microservice responsible to process orders from  RabbitMQ, and persistence datas using PostgreSQL and provides APIs to manage orders.
 ![image](https://github.com/user-attachments/assets/33d3b620-aa1e-4b57-94f9-e80c560c513d)
 ![image](https://github.com/user-attachments/assets/2c03a70f-747f-4e1d-80c3-761c6b09396a)
 
@@ -18,7 +21,7 @@ This application is a microservice responsible for managing orders, including us
 - **RabbitMQ**
 - **PostgreSQL**
 - **Swagger / OpenAPI**
-- **Docker (optional)**
+- **Docker**
 
 ---
 
